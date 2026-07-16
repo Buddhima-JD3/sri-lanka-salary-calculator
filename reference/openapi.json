@@ -122,5 +122,9 @@
   "x-embeddable-widget": {
     "documentation": "https://mypayslip.lk/salary-calculator-widget/",
     "urlTemplate": "https://mypayslip.lk/embed/salary-calculator/?salary=200000&theme=light"
+  },
+  "x-reference-implementation": {
+    "language": "JavaScript",
+    "repository": "https://github.com/Buddhima-JD3/sri-lanka-salary-calculator"
   }
 }

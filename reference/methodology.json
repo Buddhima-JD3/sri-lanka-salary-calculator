@@ -80,5 +80,6 @@
   ],
   "api": "https://mypayslip.lk/api/calc?salary=200000",
   "openapi": "https://mypayslip.lk/openapi.json",
+  "referenceImplementation": "https://github.com/Buddhima-JD3/sri-lanka-salary-calculator",
   "citation": "MyPayslip.lk, Sri Lanka 2026/27 payslip calculation methodology, verified 17 July 2026."
 }
