@@ -3,11 +3,9 @@
   "info": {
     "title": "MyPayslip.lk Sri Lanka Salary Calculator API",
     "version": "2026.07.17",
-    "description": "Deterministic, read-only Sri Lankan 2026/27 salary calculation API using rates effective from 1 April 2025. No key, storage or tracking.",
-    "license": {
-      "name": "Public read-only access"
-    }
+    "description": "Deterministic, read-only Sri Lankan 2026/27 salary calculation API using rates effective from 1 April 2025. No key, storage or tracking."
   },
+  "security": [],
   "servers": [
     {
       "url": "https://mypayslip.lk"
