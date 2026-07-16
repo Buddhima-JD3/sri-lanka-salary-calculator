@@ -17,6 +17,7 @@
         "operationId": "calculateSriLankaNetSalary",
         "summary": "Calculate a Sri Lankan monthly payslip",
         "description": "Returns APIT, EPF, ETF, stamp duty, net salary and employer cost for regular primary employment.",
+        "tags": ["Salary calculation"],
         "parameters": [
           {
             "name": "salary",
@@ -38,7 +39,20 @@
             "schema": {
               "type": "number",
               "minimum": 0,
+              "maximum": 100000000,
               "example": 200000
+            }
+          },
+          {
+            "name": "basic",
+            "in": "query",
+            "required": false,
+            "deprecated": true,
+            "description": "Legacy alias for epfBase. Use epfBase for new integrations.",
+            "schema": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000000
             }
           }
         ],
@@ -49,12 +63,55 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SalaryCalculation"
+                },
+                "example": {
+                  "currency": "LKR",
+                  "period": "monthly",
+                  "taxYear": "2026/27",
+                  "taxTableVersion": "2025/26",
+                  "ratesEffectiveFrom": "2025-04-01",
+                  "input": {
+                    "grossSalary": 200000,
+                    "epfEtfEarningsBase": 200000,
+                    "basicSalary": 200000,
+                    "nonContributoryEarnings": 0
+                  },
+                  "deductions": {
+                    "apit": 3000,
+                    "epfEmployee8pct": 16000,
+                    "stampDuty": 25,
+                    "total": 19025
+                  },
+                  "netSalary": 180975,
+                  "employerContributions": {
+                    "epfEmployer12pct": 24000,
+                    "etf3pct": 6000
+                  },
+                  "annual": {
+                    "grossSalary": 2400000,
+                    "apit": 36000,
+                    "netSalary": 2171700
+                  },
+                  "notes": ["Estimate only - confirm with payroll or the IRD."],
+                  "source": "https://mypayslip.lk",
+                  "methodology": "https://mypayslip.lk/methodology/",
+                  "openapi": "https://mypayslip.lk/openapi.json"
                 }
               }
             }
           },
           "400": {
-            "description": "Missing or invalid gross salary."
+            "description": "Missing or invalid gross salary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "pass ?salary= as monthly gross in LKR, e.g. /api/calc?salary=200000"
+                }
+              }
+            }
           }
         }
       }
@@ -67,47 +124,174 @@
         "required": [
           "currency",
           "period",
+          "taxYear",
+          "taxTableVersion",
+          "ratesEffectiveFrom",
           "input",
           "deductions",
           "netSalary",
-          "employerContributions"
+          "employerContributions",
+          "annual",
+          "notes",
+          "source",
+          "methodology",
+          "openapi"
         ],
+        "additionalProperties": false,
         "properties": {
           "currency": {
+            "type": "string",
             "const": "LKR"
           },
           "period": {
+            "type": "string",
             "const": "monthly"
           },
           "taxYear": {
-            "type": "string"
+            "type": "string",
+            "example": "2026/27"
           },
           "taxTableVersion": {
             "type": "string",
-            "description": "Label on the latest APIT tables published by the IRD."
+            "description": "Label on the latest APIT tables published by the IRD.",
+            "example": "2025/26"
           },
           "ratesEffectiveFrom": {
             "type": "string",
             "format": "date"
           },
           "input": {
-            "type": "object"
+            "$ref": "#/components/schemas/SalaryInput"
           },
           "deductions": {
-            "type": "object"
+            "$ref": "#/components/schemas/Deductions"
           },
           "netSalary": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0,
+            "description": "Monthly gross salary less APIT, employee EPF and stamp duty."
           },
           "employerContributions": {
-            "type": "object"
+            "$ref": "#/components/schemas/EmployerContributions"
           },
           "annual": {
-            "type": "object"
+            "$ref": "#/components/schemas/AnnualCalculation"
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source": {
+            "type": "string",
+            "format": "uri"
           },
           "methodology": {
             "type": "string",
             "format": "uri"
+          },
+          "openapi": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "SalaryInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "grossSalary",
+          "epfEtfEarningsBase",
+          "basicSalary",
+          "nonContributoryEarnings"
+        ],
+        "properties": {
+          "grossSalary": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 100000000
+          },
+          "epfEtfEarningsBase": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100000000
+          },
+          "basicSalary": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Backwards-compatible alias of epfEtfEarningsBase."
+          },
+          "nonContributoryEarnings": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      },
+      "Deductions": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["apit", "epfEmployee8pct", "stampDuty", "total"],
+        "properties": {
+          "apit": {
+            "type": "number",
+            "minimum": 0
+          },
+          "epfEmployee8pct": {
+            "type": "number",
+            "minimum": 0
+          },
+          "stampDuty": {
+            "type": "number",
+            "enum": [0, 25]
+          },
+          "total": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      },
+      "EmployerContributions": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["epfEmployer12pct", "etf3pct"],
+        "properties": {
+          "epfEmployer12pct": {
+            "type": "number",
+            "minimum": 0
+          },
+          "etf3pct": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      },
+      "AnnualCalculation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["grossSalary", "apit", "netSalary"],
+        "properties": {
+          "grossSalary": {
+            "type": "number",
+            "minimum": 0
+          },
+          "apit": {
+            "type": "number",
+            "minimum": 0
+          },
+          "netSalary": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "string"
           }
         }
       }
