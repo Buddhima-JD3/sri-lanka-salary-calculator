@@ -1,9 +1,27 @@
 {
-  "name": "sri-lanka-salary-calculator-reference",
+  "name": "sri-lanka-salary-calculator",
   "version": "2026.7.17",
-  "private": true,
   "description": "Source-backed Sri Lanka APIT, EPF, ETF and net salary reference implementation",
   "type": "module",
+  "main": "./calculator.mjs",
+  "types": "./calculator.d.mts",
+  "exports": {
+    ".": {
+      "types": "./calculator.d.mts",
+      "import": "./calculator.mjs",
+      "default": "./calculator.mjs"
+    }
+  },
+  "files": [
+    "calculator.mjs",
+    "calculator.d.mts",
+    "reference/methodology.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "calculate": "node examples/calculate.mjs",
     "test": "node --test"
@@ -11,8 +29,12 @@
   "homepage": "https://mypayslip.lk/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Buddhima-JD3/sri-lanka-salary-calculator.git"
+    "url": "git+https://github.com/Buddhima-JD3/sri-lanka-salary-calculator.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
   "keywords": [
     "sri-lanka",
     "salary-calculator",

@@ -56,8 +56,15 @@ accepts a gross monthly salary and an optional EPF/ETF eligible earnings base.
 The contribution base should come from payroll records when excluded or
 unusual payments make it different from gross salary.
 
+Install the package from npm after its first registry release, or directly
+from this public repository now:
+
+```bash
+npm install github:Buddhima-JD3/sri-lanka-salary-calculator
+```
+
 ```js
-import { calculateSalary } from "./calculator.mjs";
+import { calculateSalary } from "sri-lanka-salary-calculator";
 
 const result = calculateSalary({
   grossSalary: 200000,
