@@ -1,0 +1,126 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "MyPayslip.lk Sri Lanka Salary Calculator API",
+    "version": "2026.07.17",
+    "description": "Deterministic, read-only Sri Lankan 2026/27 salary calculation API using rates effective from 1 April 2025. No key, storage or tracking.",
+    "license": {
+      "name": "Public read-only access"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://mypayslip.lk"
+    }
+  ],
+  "paths": {
+    "/api/calc": {
+      "get": {
+        "operationId": "calculateSriLankaNetSalary",
+        "summary": "Calculate a Sri Lankan monthly payslip",
+        "description": "Returns APIT, EPF, ETF, stamp duty, net salary and employer cost for regular primary employment.",
+        "parameters": [
+          {
+            "name": "salary",
+            "in": "query",
+            "required": true,
+            "description": "Monthly gross salary in LKR.",
+            "schema": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 100000000,
+              "example": 200000
+            }
+          },
+          {
+            "name": "epfBase",
+            "in": "query",
+            "required": false,
+            "description": "EPF/ETF-eligible monthly earnings. Defaults to the full gross salary.",
+            "schema": {
+              "type": "number",
+              "minimum": 0,
+              "example": 200000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Calculated monthly and annual salary breakdown.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SalaryCalculation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or invalid gross salary."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SalaryCalculation": {
+        "type": "object",
+        "required": [
+          "currency",
+          "period",
+          "input",
+          "deductions",
+          "netSalary",
+          "employerContributions"
+        ],
+        "properties": {
+          "currency": {
+            "const": "LKR"
+          },
+          "period": {
+            "const": "monthly"
+          },
+          "taxYear": {
+            "type": "string"
+          },
+          "taxTableVersion": {
+            "type": "string",
+            "description": "Label on the latest APIT tables published by the IRD."
+          },
+          "ratesEffectiveFrom": {
+            "type": "string",
+            "format": "date"
+          },
+          "input": {
+            "type": "object"
+          },
+          "deductions": {
+            "type": "object"
+          },
+          "netSalary": {
+            "type": "number"
+          },
+          "employerContributions": {
+            "type": "object"
+          },
+          "annual": {
+            "type": "object"
+          },
+          "methodology": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Calculation methodology and primary sources",
+    "url": "https://mypayslip.lk/methodology/"
+  },
+  "x-embeddable-widget": {
+    "documentation": "https://mypayslip.lk/salary-calculator-widget/",
+    "urlTemplate": "https://mypayslip.lk/embed/salary-calculator/?salary=200000&theme=light"
+  }
+}

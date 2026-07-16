@@ -1,0 +1,84 @@
+{
+  "name": "MyPayslip.lk Sri Lanka payslip calculation methodology",
+  "version": "2026-07-17",
+  "url": "https://mypayslip.lk/methodology/",
+  "verifiedDate": "2026-07-17",
+  "currentYearOfAssessment": "2026/27",
+  "sourceTableYear": "2025/26",
+  "effectiveFrom": "2025-04-01",
+  "currency": "LKR",
+  "period": "monthly",
+  "scope": "Regular profits from primary employment in Sri Lanka",
+  "apit": {
+    "monthlyRelief": 150000,
+    "annualRelief": 1800000,
+    "bands": [
+      { "annualWidth": 1000000, "rate": 0.06 },
+      { "annualWidth": 500000, "rate": 0.18 },
+      { "annualWidth": 500000, "rate": 0.24 },
+      { "annualWidth": 500000, "rate": 0.3 },
+      { "annualWidth": null, "rate": 0.36 }
+    ],
+    "source": "https://www.ird.gov.lk/en/publications/sitepages/apit_tax_tables.aspx?menuid=1502",
+    "legalBasis": "https://www.ird.gov.lk/en/type%20of%20taxes/sitepages/income%20tax.aspx?menuid=1201",
+    "currentLawReviewed": "https://www.ird.gov.lk/en/publications/Acts_Income%20Tax_2017/IR_Act_No_11-2026_E.pdf",
+    "provenanceNote": "The IRD's latest published APIT tables are labelled 2025/26. The statutory relief and rates apply from 1 April 2025 and remain the basis used for the current 2026/27 year of assessment."
+  },
+  "contributions": {
+    "defaultBase": "Full gross monthly earnings",
+    "employeeEpfRate": 0.08,
+    "employerEpfRate": 0.12,
+    "employerEtfRate": 0.03,
+    "notes": "Use the contributory earnings in payroll records when excluded or unusual payments make the eligible base differ from gross.",
+    "epfSource": "https://www.cbsl.gov.lk/en/employees-provident-fund",
+    "etfSource": "https://etfb.lk/employer-details/"
+  },
+  "stampDuty": {
+    "grossRemunerationThreshold": 25000,
+    "amountAboveThreshold": 25,
+    "source": "https://www.ird.gov.lk/en/type%20of%20taxes/sitepages/stampduty.aspx"
+  },
+  "formula": {
+    "totalEmployeeDeductions": "APIT + employee EPF + stamp duty",
+    "netPay": "gross salary - total employee deductions",
+    "employerCost": "gross salary + employer EPF + employer ETF"
+  },
+  "rounding": "Calculations retain JavaScript number precision; public API values are rounded to two decimal places.",
+  "testCases": [
+    {
+      "grossSalary": 150000,
+      "epfEtfEarningsBase": 150000,
+      "apit": 0,
+      "employeeEpf": 12000,
+      "stampDuty": 25,
+      "netPay": 137975
+    },
+    {
+      "grossSalary": 200000,
+      "epfEtfEarningsBase": 200000,
+      "apit": 3000,
+      "employeeEpf": 16000,
+      "stampDuty": 25,
+      "netPay": 180975
+    },
+    {
+      "grossSalary": 300000,
+      "epfEtfEarningsBase": 300000,
+      "apit": 18500,
+      "employeeEpf": 24000,
+      "stampDuty": 25,
+      "netPay": 257475
+    },
+    {
+      "grossSalary": 500000,
+      "epfEtfEarningsBase": 500000,
+      "apit": 86000,
+      "employeeEpf": 40000,
+      "stampDuty": 25,
+      "netPay": 373975
+    }
+  ],
+  "api": "https://mypayslip.lk/api/calc?salary=200000",
+  "openapi": "https://mypayslip.lk/openapi.json",
+  "citation": "MyPayslip.lk, Sri Lanka 2026/27 payslip calculation methodology, verified 17 July 2026."
+}

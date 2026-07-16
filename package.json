@@ -1,0 +1,25 @@
+{
+  "name": "sri-lanka-salary-calculator-reference",
+  "version": "2026.7.17",
+  "private": true,
+  "description": "Source-backed Sri Lanka APIT, EPF, ETF and net salary reference implementation",
+  "type": "module",
+  "scripts": {
+    "calculate": "node examples/calculate.mjs",
+    "test": "node --test"
+  },
+  "homepage": "https://mypayslip.lk/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Buddhima-JD3/sri-lanka-salary-calculator.git"
+  },
+  "keywords": [
+    "sri-lanka",
+    "salary-calculator",
+    "payslip",
+    "apit",
+    "paye",
+    "epf",
+    "etf"
+  ]
+}
