@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://buddhima-jd3.github.io/sri-lanka-salary-calculator/">
+  <title>Sri Lanka Salary Calculator Developer Reference</title>
+  <meta name="description" content="Source-backed JavaScript reference for Sri Lanka APIT, EPF, ETF, payslip deductions, net salary and employer cost.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #152019;
+      --muted: #536159;
+      --line: #d9e1dc;
+      --surface: #f4f7f5;
+      --accent: #167a56;
+      --code: #101411;
+    }
+    * { box-sizing: border-box; }
+    html { font-family: Arial, sans-serif; color: var(--ink); background: #fff; }
+    body { margin: 0; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    header, main, footer { width: min(920px, calc(100% - 32px)); margin-inline: auto; }
+    header { display: flex; justify-content: space-between; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    header strong { font-size: 15px; }
+    header a { font-size: 13px; }
+    .intro { padding: 72px 0 58px; max-width: 780px; }
+    .eyebrow { color: var(--accent); font: 700 11px/1.4 monospace; text-transform: uppercase; }
+    h1 { margin: 14px 0 0; max-width: 720px; font-size: clamp(38px, 7vw, 64px); line-height: 1.02; letter-spacing: 0; }
+    .lede { margin: 24px 0 0; max-width: 700px; color: var(--muted); font-size: 17px; line-height: 1.75; }
+    .actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 28px; font-size: 14px; font-weight: 700; }
+    section { padding: 48px 0; border-top: 1px solid var(--line); }
+    h2 { margin: 0 0 20px; font-size: 27px; letter-spacing: 0; }
+    p, li { color: var(--muted); line-height: 1.7; }
+    .result { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+    .result div { padding: 18px; border-right: 1px solid var(--line); }
+    .result div:last-child { border-right: 0; }
+    .result span { display: block; color: var(--muted); font-size: 12px; }
+    .result strong { display: block; margin-top: 7px; font-size: 20px; }
+    pre { overflow-x: auto; padding: 20px; background: var(--code); color: #e9f0eb; font: 13px/1.65 monospace; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+    ul { padding-left: 20px; }
+    footer { padding: 30px 0 44px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
+    @media (max-width: 640px) {
+      header { align-items: flex-start; }
+      .intro { padding: 52px 0 44px; }
+      .result, .grid { grid-template-columns: 1fr; }
+      .result div { border-right: 0; border-bottom: 1px solid var(--line); }
+      .result div:last-child { border-bottom: 0; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Sri Lanka Salary Calculator Reference",
+    "codeRepository": "https://github.com/Buddhima-JD3/sri-lanka-salary-calculator",
+    "programmingLanguage": "JavaScript",
+    "runtimePlatform": "Node.js",
+    "isBasedOn": "https://mypayslip.lk/methodology/",
+    "description": "Reference calculation for Sri Lanka APIT, EPF, ETF, stamp duty, net salary and employer cost."
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <strong>Sri Lanka Salary Reference</strong>
+    <a href="https://mypayslip.lk/?utm_source=github-pages&amp;utm_medium=developer-reference">Open calculator</a>
+  </header>
+  <main>
+    <div class="intro">
+      <div class="eyebrow">Dependency-free JavaScript · verified 17 July 2026</div>
+      <h1>Sri Lanka payslip calculation, made inspectable.</h1>
+      <p class="lede">Reproduce APIT (PAYE), EPF, ETF, stamp duty, take-home salary, and employer cost for regular primary employment. The code, tests, OpenAPI specification, methodology, and official sources are public.</p>
+      <div class="actions">
+        <a href="https://github.com/Buddhima-JD3/sri-lanka-salary-calculator">View source and tests</a>
+        <a href="https://mypayslip.lk/methodology/">Read canonical methodology</a>
+        <a href="https://mypayslip.lk/salary-calculator-widget/">Embed the calculator</a>
+      </div>
+    </div>
+
+    <section>
+      <h2>Verified LKR 200,000 example</h2>
+      <div class="result">
+        <div><span>APIT + EPF + stamp</span><strong>LKR 19,025</strong></div>
+        <div><span>Estimated net pay</span><strong>LKR 180,975</strong></div>
+        <div><span>Employer EPF + ETF</span><strong>LKR 30,000</strong></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div>
+        <h2>Run locally</h2>
+        <pre><code>git clone https://github.com/Buddhima-JD3/sri-lanka-salary-calculator.git
+cd sri-lanka-salary-calculator
+npm test
+node examples/calculate.mjs 200000</code></pre>
+      </div>
+      <div>
+        <h2>Call the API</h2>
+        <pre><code>curl "https://mypayslip.lk/api/calc?salary=200000"</code></pre>
+        <p>The hosted endpoint is read-only, requires no key, permits cross-origin requests, and does not store salary inputs.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div>
+        <h2>Machine-readable</h2>
+        <ul>
+          <li><a href="https://mypayslip.lk/openapi.json">OpenAPI 3.1</a></li>
+          <li><a href="https://mypayslip.lk/calculation-methodology.json">Methodology JSON</a></li>
+          <li><a href="https://mypayslip.lk/llms.txt">Agent guidance</a></li>
+          <li><a href="https://mypayslip.lk/embed/salary-calculator/?salary=200000&amp;theme=light">Hosted widget</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Primary sources</h2>
+        <ul>
+          <li><a href="https://www.ird.gov.lk/en/publications/sitepages/apit_tax_tables.aspx?menuid=1502">IRD APIT tables</a></li>
+          <li><a href="https://www.cbsl.gov.lk/en/employees-provident-fund">CBSL EPF guidance</a></li>
+          <li><a href="https://etfb.lk/employer-details/">ETF Board guidance</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer>
+    Estimates cover regular primary employment. Confirm exceptional payroll cases with the relevant Sri Lankan authority or a qualified adviser.
+  </footer>
+</body>
+</html>
