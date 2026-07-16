@@ -13,6 +13,7 @@ the relief and rates effective from 1 April 2025 remain the basis used for
 
 ## Try the calculator
 
+- [Developer reference](https://buddhima-jd3.github.io/sri-lanka-salary-calculator/)
 - [Sri Lanka salary calculator](https://mypayslip.lk/)
 - [Embeddable salary calculator widget](https://mypayslip.lk/salary-calculator-widget/)
 - [Payslip generator](https://mypayslip.lk/payslip-generator/)
