@@ -38,8 +38,9 @@
     .result div:last-child { border-right: 0; }
     .result span { display: block; color: var(--muted); font-size: 12px; }
     .result strong { display: block; margin-top: 7px; font-size: 20px; }
-    pre { overflow-x: auto; padding: 20px; background: var(--code); color: #e9f0eb; font: 13px/1.65 monospace; }
+    pre { max-width: 100%; overflow-x: auto; padding: 20px; background: var(--code); color: #e9f0eb; font: 13px/1.65 monospace; }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+    .grid > div { min-width: 0; }
     ul { padding-left: 20px; }
     footer { padding: 30px 0 44px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }
     @media (max-width: 640px) {
