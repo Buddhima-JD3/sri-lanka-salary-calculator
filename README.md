@@ -141,6 +141,7 @@ npm run mcp
 
 - [OpenAPI 3.1 specification](./reference/openapi.json)
 - [Calculation methodology and test cases](./reference/methodology.json)
+- [Archived v2026.27.2 source](https://archive.softwareheritage.org/swh:1:rev:a5b7e4f57beae3cfab9418e2b425dfac7dabbbff/)
 - Live OpenAPI: https://mypayslip.lk/openapi.json
 - Live methodology: https://mypayslip.lk/calculation-methodology.json
 - Agent guidance: https://mypayslip.lk/llms.txt
