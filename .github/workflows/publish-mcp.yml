@@ -50,7 +50,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/buddhima-jd3/sri-lanka-payslip-mcp:2026.7.24
+          tags: ghcr.io/buddhima-jd3/sri-lanka-payslip-mcp:2026.27.2
           labels: |
             io.modelcontextprotocol.server.name=io.github.Buddhima-JD3/sri-lanka-payslip
             org.opencontainers.image.source=https://github.com/Buddhima-JD3/sri-lanka-salary-calculator

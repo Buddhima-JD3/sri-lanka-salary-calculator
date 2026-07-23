@@ -7,7 +7,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import * as z from "zod/v4";
 import { calculateSalary } from "./calculator.mjs";
 
-const VERSION = "2026.7.24";
+const VERSION = "2026.27.2";
 const METHODOLOGY_URL = "https://mypayslip.lk/methodology/";
 const GENERATOR_URL = "https://mypayslip.lk/payslip-generator/";
 
