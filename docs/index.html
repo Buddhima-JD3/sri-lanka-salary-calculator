@@ -5,8 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://buddhima-jd3.github.io/sri-lanka-salary-calculator/">
-  <title>Sri Lanka Salary Calculator Developer Reference</title>
-  <meta name="description" content="Source-backed JavaScript reference for Sri Lanka APIT, EPF, ETF, payslip deductions, net salary and employer cost.">
+  <link rel="alternate" type="text/plain" href="https://mypayslip.lk/llms.txt" title="MyPayslip.lk agent guidance">
+  <link rel="alternate" type="application/json" href="https://mypayslip.lk/.well-known/mcp/server-card.json" title="Sri Lanka Payslip MCP server card">
+  <title>Sri Lanka Payslip Calculator and MCP Developer Reference</title>
+  <meta name="description" content="Source-backed JavaScript and MCP reference for Sri Lanka APIT, PAYE, EPF, ETF, payslip deductions, net salary and employer cost.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sri Lanka Payslip Calculator and MCP Developer Reference">
+  <meta property="og:description" content="Auditable Sri Lanka salary calculations, official-source citations, tests, API and read-only MCP tools for AI assistants.">
+  <meta property="og:url" content="https://buddhima-jd3.github.io/sri-lanka-salary-calculator/">
+  <meta property="og:image" content="https://mypayslip.lk/og-image-v2.png">
+  <meta property="og:site_name" content="Sri Lanka Salary Calculator Reference">
   <style>
     :root {
       color-scheme: light;
@@ -54,13 +62,46 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareSourceCode",
-    "name": "Sri Lanka Salary Calculator Reference",
-    "codeRepository": "https://github.com/Buddhima-JD3/sri-lanka-salary-calculator",
-    "programmingLanguage": "JavaScript",
-    "runtimePlatform": "Node.js",
-    "isBasedOn": "https://mypayslip.lk/methodology/",
-    "description": "Reference calculation for Sri Lanka APIT, EPF, ETF, stamp duty, net salary and employer cost."
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://buddhima-jd3.github.io/sri-lanka-salary-calculator/#webpage",
+        "url": "https://buddhima-jd3.github.io/sri-lanka-salary-calculator/",
+        "name": "Sri Lanka Payslip Calculator and MCP Developer Reference",
+        "description": "Auditable JavaScript, API and MCP reference for Sri Lanka salary and payslip calculations.",
+        "dateModified": "2026-07-24",
+        "inLanguage": "en",
+        "mainEntity": {
+          "@id": "https://buddhima-jd3.github.io/sri-lanka-salary-calculator/#software"
+        }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "@id": "https://buddhima-jd3.github.io/sri-lanka-salary-calculator/#software",
+        "name": "Sri Lanka Salary Calculator and Payslip MCP Server",
+        "version": "2026.27.2",
+        "url": "https://mypayslip.lk/",
+        "codeRepository": "https://github.com/Buddhima-JD3/sri-lanka-salary-calculator",
+        "programmingLanguage": "JavaScript",
+        "runtimePlatform": "Node.js",
+        "license": "https://opensource.org/license/mit",
+        "isBasedOn": "https://mypayslip.lk/methodology/",
+        "sameAs": [
+          "https://registry.modelcontextprotocol.io/?q=io.github.Buddhima-JD3%2Fsri-lanka-payslip",
+          "https://github.com/Buddhima-JD3/sri-lanka-salary-calculator/releases/tag/v2026.27.2"
+        ],
+        "keywords": [
+          "Sri Lanka salary calculator",
+          "Sri Lanka payslip",
+          "APIT",
+          "PAYE",
+          "EPF",
+          "ETF",
+          "Model Context Protocol"
+        ],
+        "description": "Reference calculation and read-only MCP server for Sri Lanka APIT, PAYE, EPF, ETF, stamp duty, net salary and employer cost."
+      }
+    ]
   }
   </script>
 </head>
@@ -73,10 +114,11 @@
     <div class="intro">
       <div class="eyebrow">Dependency-free JavaScript · verified 17 July 2026</div>
       <h1>Sri Lanka payslip calculation, made inspectable.</h1>
-      <p class="lede">Reproduce APIT (PAYE), EPF, ETF, stamp duty, take-home salary, and employer cost for regular primary employment. The code, tests, OpenAPI specification, methodology, and official sources are public.</p>
+      <p class="lede">Reproduce APIT (PAYE), EPF, ETF, stamp duty, take-home salary, and employer cost for regular primary employment. The code, tests, OpenAPI specification, methodology, official sources, and read-only MCP tools are public.</p>
       <div class="actions">
         <a href="https://github.com/Buddhima-JD3/sri-lanka-salary-calculator">View source and tests</a>
         <a href="https://mypayslip.lk/methodology/">Read canonical methodology</a>
+        <a href="https://github.com/Buddhima-JD3/sri-lanka-salary-calculator#use-with-an-ai-assistant">Connect the MCP server</a>
         <a href="https://mypayslip.lk/salary-calculator-widget/">Embed the calculator</a>
       </div>
     </div>
@@ -105,6 +147,27 @@ node examples/calculate.mjs 200000</code></pre>
       </div>
     </section>
 
+    <section>
+      <h2>Use the payslip tools with an AI assistant</h2>
+      <p>The official Sri Lanka Payslip MCP server exposes three read-only tools for calculating a regular payslip, retrieving maintained payroll assumptions and sources, and checking payslip fields and arithmetic. The hosted Streamable HTTP endpoint requires no account or API key.</p>
+      <pre><code>cline mcp add sri-lanka-payslip https://mypayslip.lk/api/mcp --transport streamable-http --yes</code></pre>
+      <div class="grid">
+        <div>
+          <h2>Remote MCP</h2>
+          <ul>
+            <li>Streamable HTTP: <code>https://mypayslip.lk/api/mcp</code></li>
+            <li><a href="https://mypayslip.lk/.well-known/mcp/server-card.json">MCP server card</a></li>
+            <li><a href="https://registry.modelcontextprotocol.io/?q=io.github.Buddhima-JD3%2Fsri-lanka-payslip">Official MCP Registry entry</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Local MCP</h2>
+          <pre><code>npx -y github:Buddhima-JD3/sri-lanka-salary-calculator</code></pre>
+          <p>Local stdio mode keeps salary inputs on the user&apos;s machine.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="grid">
       <div>
         <h2>Machine-readable</h2>
@@ -112,6 +175,7 @@ node examples/calculate.mjs 200000</code></pre>
           <li><a href="https://mypayslip.lk/openapi.json">OpenAPI 3.1</a></li>
           <li><a href="https://mypayslip.lk/calculation-methodology.json">Methodology JSON</a></li>
           <li><a href="https://mypayslip.lk/llms.txt">Agent guidance</a></li>
+          <li><a href="https://mypayslip.lk/llms-full.txt">Full agent reference</a></li>
           <li><a href="https://mypayslip.lk/embed/salary-calculator/?salary=200000&amp;theme=light">Hosted widget</a></li>
         </ul>
       </div>
