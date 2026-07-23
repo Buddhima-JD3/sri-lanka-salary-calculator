@@ -95,6 +95,15 @@ the official MCP SDK. It gives compatible AI assistants three read-only tools:
 The server runs locally over stdio. Salary inputs are not sent to MyPayslip.lk
 or another external service.
 
+Official MCP Registry:
+[`io.github.Buddhima-JD3/sri-lanka-payslip`](https://registry.modelcontextprotocol.io/?q=io.github.Buddhima-JD3%2Fsri-lanka-payslip)
+
+The Registry package is a public AMD64/ARM64 container:
+
+```bash
+docker run -i --rm ghcr.io/buddhima-jd3/sri-lanka-payslip-mcp:2026.7.24
+```
+
 Add it to an MCP client configuration:
 
 ```json
