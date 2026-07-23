@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { pathToFileURL } from "node:url";
+import { realpathSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import * as z from "zod/v4";
@@ -303,7 +304,7 @@ export async function startStdioServer() {
 
 const isDirectExecution =
   process.argv[1] &&
-  import.meta.url === pathToFileURL(process.argv[1]).href;
+  realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (isDirectExecution) {
   startStdioServer().catch((error) => {

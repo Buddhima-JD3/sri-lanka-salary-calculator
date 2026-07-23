@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import { mkdtemp, rm, symlink } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
@@ -105,15 +108,22 @@ describe("Sri Lanka payslip MCP server", () => {
     });
   });
 
-  it("starts as an executable stdio server", async () => {
+  it("starts as a symlinked package executable over stdio", async () => {
     const client = new Client({
       name: "sri-lanka-payslip-stdio-test-client",
       version: "1.0.0",
     });
+    const fixtureDirectory = await mkdtemp(
+      join(tmpdir(), "sri-lanka-payslip-mcp-")
+    );
+    const executablePath = join(fixtureDirectory, "sri-lanka-payslip-mcp");
+    await symlink(
+      fileURLToPath(new URL("./mcp-server.mjs", import.meta.url)),
+      executablePath
+    );
     const transport = new StdioClientTransport({
       command: process.execPath,
-      args: ["mcp-server.mjs"],
-      cwd: fileURLToPath(new URL(".", import.meta.url)),
+      args: [executablePath],
       stderr: "pipe",
     });
 
@@ -127,6 +137,7 @@ describe("Sri Lanka payslip MCP server", () => {
       assert.equal(result.structuredContent.netPay, 180975);
     } finally {
       await client.close();
+      await rm(fixtureDirectory, { recursive: true, force: true });
     }
   });
 });
