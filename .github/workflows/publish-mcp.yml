@@ -1,0 +1,78 @@
+name: Publish MCP server
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "mcp-v*"
+
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test calculator and MCP protocol
+        run: npm test
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish multi-platform image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ghcr.io/buddhima-jd3/sri-lanka-payslip-mcp:2026.7.24
+          labels: |
+            io.modelcontextprotocol.server.name=io.github.buddhima-jd3/sri-lanka-payslip
+            org.opencontainers.image.source=https://github.com/Buddhima-JD3/sri-lanka-salary-calculator
+            org.opencontainers.image.description=Source-backed Sri Lanka payslip MCP server
+            org.opencontainers.image.licenses=MIT
+
+      - name: Make the container image public
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          gh api
+          --method PATCH
+          /user/packages/container/sri-lanka-payslip-mcp/visibility
+          -f visibility=public
+
+      - name: Install MCP Registry publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" |
+            tar xz mcp-publisher
+
+      - name: Authenticate to the official MCP Registry
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish to the official MCP Registry
+        run: ./mcp-publisher publish

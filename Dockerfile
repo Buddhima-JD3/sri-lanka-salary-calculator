@@ -1,5 +1,7 @@
 FROM node:20-alpine
 
+LABEL io.modelcontextprotocol.server.name="io.github.buddhima-jd3/sri-lanka-payslip"
+
 WORKDIR /app
 
 COPY package.json package-lock.json ./
