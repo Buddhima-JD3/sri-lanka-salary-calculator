@@ -57,15 +57,6 @@ jobs:
             org.opencontainers.image.description=Source-backed Sri Lanka payslip MCP server
             org.opencontainers.image.licenses=MIT
 
-      - name: Make the container image public
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: >-
-          gh api
-          --method PATCH
-          /user/packages/container/sri-lanka-payslip-mcp/visibility
-          -f visibility=public
-
       - name: Install MCP Registry publisher
         run: |
           curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" |
