@@ -80,6 +80,44 @@ Verify the published examples:
 npm test
 ```
 
+## Use with an AI assistant
+
+This repository includes a local
+[Model Context Protocol](https://modelcontextprotocol.io/) server built with
+the official MCP SDK. It gives compatible AI assistants three read-only tools:
+
+| Tool | Purpose |
+| --- | --- |
+| `calculate_sri_lanka_payslip` | Calculate APIT/PAYE, EPF, ETF, stamp duty, net pay, and employer cost |
+| `get_sri_lanka_payroll_reference` | Retrieve maintained assumptions, scope limits, and official sources |
+| `get_sri_lanka_payslip_checklist` | Prepare or review the required payslip fields and arithmetic checks |
+
+The server runs locally over stdio. Salary inputs are not sent to MyPayslip.lk
+or another external service.
+
+Add it to an MCP client configuration:
+
+```json
+{
+  "mcpServers": {
+    "sri-lanka-payslip": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "github:Buddhima-JD3/sri-lanka-salary-calculator"
+      ]
+    }
+  }
+}
+```
+
+Or start it from this repository:
+
+```bash
+npm install
+npm run mcp
+```
+
 ## Machine-readable references
 
 - [OpenAPI 3.1 specification](./reference/openapi.json)

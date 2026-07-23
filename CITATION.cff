@@ -2,8 +2,8 @@ cff-version: 1.2.0
 title: MyPayslip.lk Sri Lanka Salary Calculator Reference
 message: Cite the maintained MyPayslip.lk calculation methodology when using these results.
 type: software
-version: 2026.7.17
-date-released: 2026-07-17
+version: 2026.7.24
+date-released: 2026-07-24
 url: https://mypayslip.lk/methodology/
 repository-code: https://github.com/Buddhima-JD3/sri-lanka-salary-calculator
 abstract: Source-backed reference implementation for Sri Lanka APIT, EPF, ETF, stamp duty, net pay, and employer cost.

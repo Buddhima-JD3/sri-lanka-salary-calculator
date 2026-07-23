@@ -1,7 +1,7 @@
 {
   "name": "sri-lanka-salary-calculator",
-  "version": "2026.7.17",
-  "description": "Source-backed Sri Lanka APIT, EPF, ETF and net salary reference implementation",
+  "version": "2026.7.24",
+  "description": "Source-backed Sri Lanka payslip calculator and MCP server for APIT, EPF, ETF and net salary",
   "type": "module",
   "main": "./calculator.mjs",
   "types": "./calculator.d.mts",
@@ -10,11 +10,16 @@
       "types": "./calculator.d.mts",
       "import": "./calculator.mjs",
       "default": "./calculator.mjs"
-    }
+    },
+    "./mcp": "./mcp-server.mjs"
+  },
+  "bin": {
+    "sri-lanka-payslip-mcp": "./mcp-server.mjs"
   },
   "files": [
     "calculator.mjs",
     "calculator.d.mts",
+    "mcp-server.mjs",
     "reference/methodology.json",
     "README.md",
     "LICENSE"
@@ -24,6 +29,7 @@
   },
   "scripts": {
     "calculate": "node examples/calculate.mjs",
+    "mcp": "node mcp-server.mjs",
     "test": "node --test"
   },
   "homepage": "https://mypayslip.lk/",
@@ -39,9 +45,18 @@
     "sri-lanka",
     "salary-calculator",
     "payslip",
+    "mcp",
+    "model-context-protocol",
     "apit",
     "paye",
     "epf",
     "etf"
-  ]
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "zod": "^4.4.3"
+  },
+  "overrides": {
+    "@hono/node-server": "^2.0.5"
+  }
 }
