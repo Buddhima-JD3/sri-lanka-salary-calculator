@@ -105,6 +105,9 @@ sent to MyPayslip.lk or another external service.
 Official MCP Registry:
 [`io.github.Buddhima-JD3/sri-lanka-payslip`](https://registry.modelcontextprotocol.io/?q=io.github.Buddhima-JD3%2Fsri-lanka-payslip)
 
+Agent-oriented installation instructions are available in
+[`llms-install.md`](./llms-install.md).
+
 The Registry package is a public AMD64/ARM64 container:
 
 ```bash
