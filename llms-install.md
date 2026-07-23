@@ -9,14 +9,25 @@ https://mypayslip.lk/api/mcp
 
 ## Remote configuration
 
-For clients that accept an MCP server URL, create a server named
-`sri-lanka-payslip` using:
+For Cline CLI, run:
+
+```bash
+cline mcp add sri-lanka-payslip https://mypayslip.lk/api/mcp \
+  --transport streamable-http \
+  --yes
+```
+
+For Cline IDE or another client that accepts an MCP server configuration,
+create a server named `sri-lanka-payslip` using:
 
 ```json
 {
   "mcpServers": {
     "sri-lanka-payslip": {
-      "url": "https://mypayslip.lk/api/mcp"
+      "type": "streamableHttp",
+      "url": "https://mypayslip.lk/api/mcp",
+      "disabled": false,
+      "autoApprove": []
     }
   }
 }
