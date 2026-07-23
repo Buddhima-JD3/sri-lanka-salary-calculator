@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.buddhima-jd3/sri-lanka-payslip",
+  "name": "io.github.Buddhima-JD3/sri-lanka-payslip",
   "title": "Sri Lanka Payslip",
   "description": "Source-backed Sri Lanka payslip tools for APIT/PAYE, EPF, ETF, stamp duty, and net pay.",
   "repository": {

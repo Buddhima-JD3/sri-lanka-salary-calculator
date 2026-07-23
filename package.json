@@ -1,7 +1,7 @@
 {
   "name": "sri-lanka-salary-calculator",
   "version": "2026.7.24",
-  "mcpName": "io.github.buddhima-jd3/sri-lanka-payslip",
+  "mcpName": "io.github.Buddhima-JD3/sri-lanka-payslip",
   "description": "Source-backed Sri Lanka payslip calculator and MCP server for APIT, EPF, ETF and net salary",
   "type": "module",
   "main": "./calculator.mjs",
